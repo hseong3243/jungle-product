@@ -2,6 +2,7 @@ package com.hseong.jungleproduct.repository;
 
 import com.hseong.jungleproduct.service.ProductRepository;
 import com.hseong.jungleproduct.domain.Product;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,5 +20,10 @@ public class ProductMemoryRepository implements ProductRepository {
     public Long save(Product product) {
         products.put(product.getProductId(), product);
         return product.getProductId();
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return products.values().stream().toList();
     }
 }
