@@ -24,7 +24,15 @@ public class Product {
     }
 
     public void initializeInventory(int displayAmount, int storageAmount) {
+        validate(displayAmount);
+        validate(storageAmount);
         this.displayAmount = displayAmount;
         this.storageAmount = storageAmount;
+    }
+
+    private void validate(int amount) {
+        if(amount < 0) {
+            throw new IllegalArgumentException("재고를 음수로 초기화할 수 없습니다.");
+        }
     }
 }
