@@ -2,6 +2,7 @@ package com.hseong.jungleproduct.service;
 
 import com.hseong.jungleproduct.domain.Product;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 
@@ -26,5 +27,12 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(NoSuchElementException::new);
         return ProductDto.from(product);
+    }
+
+    public List<ProductDto> findAll() {
+        List<Product> products = productRepository.findAll();
+        return products.stream()
+                .map(ProductDto::from)
+                .toList();
     }
 }

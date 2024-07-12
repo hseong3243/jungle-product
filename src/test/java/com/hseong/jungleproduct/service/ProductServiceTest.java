@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hseong.jungleproduct.domain.Product;
 import com.hseong.jungleproduct.repository.ProductMemoryRepository;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -96,6 +97,40 @@ class ProductServiceTest {
             assertThat(productDto.price()).isEqualTo(product.getPrice());
             assertThat(productDto.displayAmount()).isEqualTo(product.getDisplayAmount());
             assertThat(productDto.storageAmount()).isEqualTo(product.getStorageAmount());
+        }
+    }
+
+    @Nested
+    @DisplayName("findAll 호출 시")
+    class FindAllTest {
+
+        private Product productA;
+        private Product productB;
+        private Product productC;
+        private Product productD;
+
+        @BeforeEach
+        void setUp() {
+            productA = new Product(2354L, "미니얼룩말", 24000);
+            productB = new Product(2356L, "어흥사자", 36000);
+            productC = new Product(2325L, "아기호랑이", 22000);
+            productD = new Product(4364L, "아기늑대", 21000);
+        }
+
+        @Test
+        void 모든_상품을_조회합니다() {
+            //given
+            productRepository.save(productA);
+            productRepository.save(productB);
+            productRepository.save(productC);
+            productRepository.save(productD);
+
+            //when
+            List<ProductDto> productDtos = productService.findAll();
+
+            //then
+            assertThat(productDtos).map(ProductDto::name)
+                    .containsExactlyInAnyOrder("미니얼룩말", "어흥사자", "아기호랑이", "아기늑대");
         }
     }
 }
