@@ -18,14 +18,12 @@ public class ProductService {
     }
 
     public void initializeAmount(Long productId, int displayAmount, int storageAmount) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(NoSuchElementException::new);
+        Product product = getProduct(productId);
         product.initializeInventory(displayAmount, storageAmount);
     }
 
     public ProductDto findProduct(Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(NoSuchElementException::new);
+        Product product = getProduct(productId);
         return ProductDto.from(product);
     }
 
@@ -34,5 +32,10 @@ public class ProductService {
         return products.stream()
                 .map(ProductDto::from)
                 .toList();
+    }
+
+    private Product getProduct(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(NoSuchElementException::new);
     }
 }
