@@ -25,4 +25,9 @@ public class Product {
         }
         displayAmount -= amount;
     }
+
+    public void initializeInventory(int displayAmount, int storageAmount) {
+        this.displayAmount = displayAmount;
+        this.storageAmount = storageAmount;
+    }
 }

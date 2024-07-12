@@ -1,0 +1,22 @@
+package com.hseong.jungleproduct.service;
+
+import com.hseong.jungleproduct.domain.Order;
+import com.hseong.jungleproduct.domain.Product;
+import jakarta.transaction.Transactional;
+import java.util.NoSuchElementException;
+import lombok.RequiredArgsConstructor;
+
+@Transactional
+@RequiredArgsConstructor
+public class OrderService {
+
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
+
+    public Long buyProduct(Long productId, int amount) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(NoSuchElementException::new);
+        Order order = Order.buy(product, amount);
+        return orderRepository.save(order);
+    }
+}
