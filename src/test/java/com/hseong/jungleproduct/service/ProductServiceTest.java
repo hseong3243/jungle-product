@@ -69,4 +69,33 @@ class ProductServiceTest {
             assertThat(product.getStorageAmount()).isEqualTo(20);
         }
     }
+
+    @Nested
+    @DisplayName("findProduct 호출 시")
+    class FindProductTest {
+
+        private Product product;
+
+        @BeforeEach
+        void setUp() {
+            product = new Product(2345L, "미니얼룩말", 24000);
+            product.initializeInventory(10, 20);
+        }
+
+        @Test
+        void 단일_상품을_조회합니다() {
+            //given
+            productRepository.save(product);
+
+            //when
+            ProductDto productDto = productService.findProduct(product.getProductId());
+
+            //then
+            assertThat(productDto.productId()).isEqualTo(product.getProductId());
+            assertThat(productDto.name()).isEqualTo(product.getName());
+            assertThat(productDto.price()).isEqualTo(product.getPrice());
+            assertThat(productDto.displayAmount()).isEqualTo(product.getDisplayAmount());
+            assertThat(productDto.storageAmount()).isEqualTo(product.getStorageAmount());
+        }
+    }
 }

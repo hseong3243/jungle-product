@@ -21,4 +21,10 @@ public class ProductService {
                 .orElseThrow(NoSuchElementException::new);
         product.initializeInventory(displayAmount, storageAmount);
     }
+
+    public ProductDto findProduct(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(NoSuchElementException::new);
+        return ProductDto.from(product);
+    }
 }
