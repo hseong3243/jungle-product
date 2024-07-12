@@ -44,4 +44,29 @@ class ProductServiceTest {
             });
         }
     }
+
+    @Nested
+    @DisplayName("initializeAmount 호출 시")
+    class InitializeAmountTest {
+
+        private Product product;
+
+        @BeforeEach
+        void setUp() {
+            product = new Product(3423L, "미니얼룩말", 24000);
+        }
+
+        @Test
+        void 상품_재고를_초기화합니다() {
+            //given
+            productRepository.save(product);
+
+            //when
+            productService.initializeAmount(product.getProductId(), 10, 20);
+
+            //then
+            assertThat(product.getDisplayAmount()).isEqualTo(10);
+            assertThat(product.getStorageAmount()).isEqualTo(20);
+        }
+    }
 }
