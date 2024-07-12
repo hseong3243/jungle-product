@@ -1,7 +1,6 @@
 package com.hseong.jungleproduct.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchException;
 
 import com.hseong.jungleproduct.domain.Order;
 import com.hseong.jungleproduct.domain.Product;
@@ -77,14 +76,14 @@ class OrderServiceTest {
         }
 
         @Test
-        void 예외_전시된_재고_수량보다_많이_주문하면() {
+        void 전시된_재고_수량보다_많이_주문하면_음수까지_떨어집니다() {
             //given
 
             //when
-            Exception exception = catchException(() -> orderService.buyProduct(product.getProductId(), 20));
+            Long orderId = orderService.buyProduct(product.getProductId(), 20);
 
             //then
-            assertThat(exception).isInstanceOf(IllegalArgumentException.class);
+            assertThat(product.getDisplayAmount()).isEqualTo(-10);
         }
     }
 }

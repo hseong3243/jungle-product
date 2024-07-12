@@ -20,9 +20,6 @@ public class Product {
     }
 
     public void buy(int amount) {
-        if(displayAmount < amount) {
-            throw new IllegalArgumentException("매대의 재고 수량이 충분하지 않습니다.");
-        }
         displayAmount -= amount;
     }
 
