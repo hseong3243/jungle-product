@@ -133,4 +133,29 @@ class ProductServiceTest {
                     .containsExactlyInAnyOrder("미니얼룩말", "어흥사자", "아기호랑이", "아기늑대");
         }
     }
+
+    @Nested
+    @DisplayName("searchProduct 호출 시")
+    class SearchProductTest {
+
+        @Test
+        @DisplayName("품번의 프리픽스에 해당하는 상품들을 검색한다.")
+        void test() {
+            //given
+            Product productA = new Product(2335L, "미니얼룩말", 24000);
+            Product productB = new Product(2356L, "미니얼룩말", 24000);
+            Product productC = new Product(3221L, "미니얼룩말", 24000);
+            productRepository.save(productA);
+            productRepository.save(productB);
+            productRepository.save(productC);
+
+            //when
+            List<ProductDto> productDtos = productService.searchProduct(23L);
+
+            //then
+            assertThat(productDtos).hasSize(2)
+                    .map(ProductDto::productId)
+                    .contains(productA.getProductId(), productB.getProductId());
+        }
+    }
 }

@@ -38,4 +38,11 @@ public class ProductService {
         return productRepository.findById(productId)
                 .orElseThrow(NoSuchElementException::new);
     }
+
+    public List<ProductDto> searchProduct(Long productIdPrefix) {
+        List<Product> products = productRepository.search(productIdPrefix);
+        return products.stream()
+                .map(ProductDto::from)
+                .toList();
+    }
 }

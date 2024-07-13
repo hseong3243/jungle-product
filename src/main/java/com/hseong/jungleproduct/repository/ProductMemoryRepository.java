@@ -26,4 +26,11 @@ public class ProductMemoryRepository implements ProductRepository {
     public List<Product> findAll() {
         return products.values().stream().toList();
     }
+
+    @Override
+    public List<Product> search(Long productIdPrefix) {
+        return products.values().stream()
+                .filter(product -> product.getProductId().toString().startsWith(productIdPrefix.toString()))
+                .toList();
+    }
 }
