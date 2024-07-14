@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hseong.jungleproduct.base.BaseControllerTest;
 import com.hseong.jungleproduct.service.ProductDto;
 import com.hseong.jungleproduct.service.ProductService;
 import java.util.List;
@@ -25,16 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 @WebMvcTest
-class ProductControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private ProductService productService;
+class ProductControllerTest extends BaseControllerTest {
 
     @Test
     @DisplayName("POST /api/products 호출 시 상품을 등록한다.")
