@@ -1,9 +1,32 @@
 <script>
+import api from "@/axios/index.js";
+
 export default {
   name: "AddProductDialog",
   data() {
     return {
+      productId: "",
+      name: "",
+      price: 0,
       dialog: false,
+    }
+  },
+  methods: {
+    async clickAddProductButton() {
+      const request = {
+        productId: this.productId,
+        name: this.name,
+        price: this.price,
+      }
+      let response = await api.post('/api/products', request);
+      console.log(response)
+      this.dialog = false;
+    },
+    clickCancelButton() {
+      this.productId = "";
+      this.name = "";
+      this.price = 0;
+      this.dialog = false;
     }
   }
 }
@@ -29,21 +52,24 @@ export default {
               <v-btn
                   variant="tonal"
                   color="red-lighten-1"
-                  @click="dialog = false">취소
+                  @click="clickCancelButton">취소
               </v-btn>
             </v-col>
           </v-row>
           <v-row>
             <v-col class="d-flex flex-column">
               <v-text-field
+                  v-model="productId"
                   variant="outlined"
                   label="품번"
                   density="comfortable"></v-text-field>
               <v-text-field
+                  v-model="name"
                   variant="outlined"
                   label="상품명"
                   density="comfortable"></v-text-field>
               <v-text-field
+                  v-model="price"
                   variant="outlined"
                   label="가격"
                   density="comfortable"></v-text-field>
@@ -54,7 +80,7 @@ export default {
               <v-btn
                   variant="tonal"
                   color="blue-lighten-1"
-                  @click="dialog = false">확인
+                  @click="clickAddProductButton">확인
               </v-btn>
             </v-col>
           </v-row>

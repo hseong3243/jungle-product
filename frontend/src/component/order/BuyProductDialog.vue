@@ -1,10 +1,28 @@
 <script>
+import api from "@/axios/index.js";
+
 export default {
   name: "BuyProductDialog",
-  props: ['product', 'sellAmount'],
+  props: ['product', 'amount'],
+  emits: ['cancelBuyProductEvent', 'buyProductEvent'],
   data() {
     return {
       dialog: false,
+    }
+  },
+  methods: {
+    clickCancelButton() {
+      this.$emit("cancelBuyProductEvent");
+      this.dialog = false;
+    },
+    async clickBuyProductButton() {
+      const request = {
+        productId: this.product.productId,
+        amount: this.amount,
+      }
+      let response = await api.post('/api/orders', request);
+      this.$emit('buyProductEvent');
+      this.dialog = false;
     }
   }
 }
@@ -30,7 +48,7 @@ export default {
               <v-btn
                   variant="tonal"
                   color="red-lighten-1"
-                  @click="dialog = false">취소
+                  @click="clickCancelButton">취소
               </v-btn>
             </v-col>
           </v-row>
@@ -43,10 +61,10 @@ export default {
                 상품명: {{ product.name }}
               </div>
               <div>
-                판매 갯수: {{sellAmount}}개
+                판매 갯수: {{ amount }}개
               </div>
               <div>
-                총 가격: {{sellAmount * product.price}}원
+                총 가격: {{ amount * product.price }}원
               </div>
             </v-col>
           </v-row>
@@ -55,7 +73,7 @@ export default {
               <v-btn
                   variant="tonal"
                   color="blue-lighten-1"
-                  @click="dialog = false">판매
+                  @click="clickBuyProductButton">판매
               </v-btn>
             </v-col>
           </v-row>
