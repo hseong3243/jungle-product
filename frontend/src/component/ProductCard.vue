@@ -1,6 +1,9 @@
 <script>
+import UpdateProductAmountDialog from "@/component/UpdateProductAmountDialog.vue";
+
 export default {
   name: "ProductCard",
+  components: {UpdateProductAmountDialog},
   props: ['product']
 }
 </script>
@@ -15,7 +18,7 @@ export default {
     <div>전시 수량: {{ product.displayAmount }}</div>
     <div>박스 재고: {{ product.storageAmount }}</div>
     <div class="d-flex justify-end ga-1 mt-1">
-      <v-btn variant="tonal" color="blue-lighten-1">재고 관리</v-btn>
+      <UpdateProductAmountDialog :product="product"/>
     </div>
   </div>
 </template>
