@@ -5,7 +5,9 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @Transactional
 @RequiredArgsConstructor
 public class ProductService {
