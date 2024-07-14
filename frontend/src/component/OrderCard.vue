@@ -1,6 +1,9 @@
 <script>
+import BuyProductDialog from "@/component/BuyProductDialog.vue";
+
 export default {
   name: "OrderCard",
+  components: {BuyProductDialog},
   props:['product']
 }
 </script>
@@ -32,11 +35,7 @@ export default {
           </select>
         </div>
       </div>
-      <v-btn
-          color="blue-lighten-1"
-          variant="tonal">
-        구매
-      </v-btn>
+      <BuyProductDialog :product="product" :sell-amount="2"/>
     </div>
   </div>
 </template>

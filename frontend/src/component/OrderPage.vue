@@ -28,7 +28,7 @@ export default {
           <div class="link">상품 관리</div>
         </v-col>
         <v-col cols="6">
-          <div class="text-h6 text-center">정글 구매 관리</div>
+          <div class="text-h6 text-center">정글 주문 관리</div>
         </v-col>
         <v-col cols="3">
 
