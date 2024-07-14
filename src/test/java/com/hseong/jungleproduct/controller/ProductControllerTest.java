@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -91,5 +92,22 @@ class ProductControllerTest {
         result.andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray());
+    }
+
+    @Test
+    @DisplayName("PATCH /api/products/{productId} 호출 시 상품 재고를 업데이트한다.")
+    void updateProduct() throws Exception {
+        //given
+        UpdateProductRequest request = new UpdateProductRequest(10, 30);
+
+        //when
+        ResultActions result = mockMvc.perform(patch("/api/products/{productId}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(request)));
+
+        //then
+        result.andDo(print())
+                .andExpect(status().isNoContent())
+                .andExpect(jsonPath("$.data").isEmpty());
     }
 }
