@@ -50,4 +50,11 @@ public class ProductController {
         productService.initializeAmount(productId, request.displayAmount(), request.storageAmount());
         return ApiResponse.success();
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/products/{productId}")
+    public ApiResponse<ProductDto> findProduct(@PathVariable("productId") Long productId) {
+        ProductDto productDto = productService.findProduct(productId);
+        return ApiResponse.success(productDto);
+    }
 }

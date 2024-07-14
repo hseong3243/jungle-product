@@ -110,4 +110,21 @@ class ProductControllerTest {
                 .andExpect(status().isNoContent())
                 .andExpect(jsonPath("$.data").isEmpty());
     }
+
+    @Test
+    @DisplayName("GET /api/products/{productId} 호출 시 단일 상품 정보를 반환한다.")
+    void findProduct() throws Exception {
+        //given
+        ProductDto productDto = new ProductDto(1235L, "미니얼룩말", 24000, 10, 30);
+
+        given(productService.findProduct(anyLong())).willReturn(productDto);
+
+        //when
+        ResultActions result = mockMvc.perform(get("/api/products/{productId}", 1L));
+
+        //then
+        result.andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").isNotEmpty());
+    }
 }
