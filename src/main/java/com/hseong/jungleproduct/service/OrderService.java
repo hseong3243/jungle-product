@@ -5,7 +5,9 @@ import com.hseong.jungleproduct.domain.Product;
 import jakarta.transaction.Transactional;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @Transactional
 @RequiredArgsConstructor
 public class OrderService {

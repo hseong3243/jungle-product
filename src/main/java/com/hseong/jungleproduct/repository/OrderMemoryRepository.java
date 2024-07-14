@@ -5,7 +5,9 @@ import com.hseong.jungleproduct.service.OrderRepository;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class OrderMemoryRepository implements OrderRepository {
 
     private final Map<Long, Order> orders = new ConcurrentHashMap<>();
