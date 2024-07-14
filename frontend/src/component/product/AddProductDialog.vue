@@ -34,23 +34,15 @@ export default {
             </v-col>
           </v-row>
           <v-row>
-            <v-col>
+            <v-col class="d-flex flex-column">
               <v-text-field
                   variant="outlined"
                   label="품번"
                   density="comfortable"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
               <v-text-field
                   variant="outlined"
                   label="상품명"
                   density="comfortable"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
               <v-text-field
                   variant="outlined"
                   label="가격"
