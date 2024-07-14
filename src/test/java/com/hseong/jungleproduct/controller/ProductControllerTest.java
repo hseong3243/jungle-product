@@ -72,4 +72,24 @@ class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray());
     }
+
+    @Test
+    @DisplayName("GET /api/products/search 호출 시 상품 품번 프리픽스와 일치하는 상품 목록을 반환한다.")
+    void test() throws Exception {
+        //given
+        Long productIdPrefix = 23L;
+        ProductDto productDto = new ProductDto(1L, "미니얼룩말", 24000, 10, 30);
+        List<ProductDto> products = List.of(productDto);
+
+        given(productService.searchProduct(anyLong())).willReturn(products);
+
+        //when
+        ResultActions result = mockMvc.perform(get("/api/products/search")
+                .param("productId", String.valueOf(productIdPrefix)));
+
+        //then
+        result.andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").isArray());
+    }
 }
