@@ -4,7 +4,17 @@ import BuyProductDialog from "@/component/order/BuyProductDialog.vue";
 export default {
   name: "OrderCard",
   components: {BuyProductDialog},
-  props:['product']
+  props: ['product'],
+  data() {
+    return {
+      amount: 0,
+    }
+  },
+  methods: {
+    consumeCancelBuyProductEvent() {
+      this.amount = 0;
+    }
+  }
 }
 </script>
 
@@ -20,22 +30,27 @@ export default {
     <div class="d-flex justify-end ga-1 mt-1">
       <div class="d-flex align-center">
         <div class="border rounded d-flex justify-center pa-1">
-          <select class="text-center">
-            <option>수량</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
+          <select
+              v-model="amount"
+              class="text-center">
+            <option value="0">수량</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
           </select>
         </div>
       </div>
-      <BuyProductDialog :product="product" :sell-amount="2"/>
+      <BuyProductDialog
+          :product="product"
+          :amount="amount"
+          @cancel-buy-product-event="consumeCancelBuyProductEvent"/>
     </div>
   </div>
 </template>
