@@ -1,5 +1,6 @@
 <script>
 import OrderCard from "@/component/order/OrderCard.vue";
+import api from "@/axios/index.js";
 
 export default {
   name: "OrderPage",
@@ -14,7 +15,18 @@ export default {
           displayAmount: 10,
           storageAmount: 30
         }
-      ]
+      ],
+      ready: false
+    }
+  },
+  async mounted() {
+    await this.findAllProducts();
+    this.ready = true;
+  },
+  methods: {
+    async findAllProducts() {
+      let response = await api.get('/api/products');
+      this.products = response.data.data;
     }
   }
 }
