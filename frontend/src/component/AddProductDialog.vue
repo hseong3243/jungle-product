@@ -10,7 +10,7 @@ export default {
 </script>
 
 <template>
-  <div class="text-center pa-4">
+  <div class="text-center">
     <v-btn @click="dialog = true" variant="tonal" color="green-lighten-1">
       상품 등록
     </v-btn>
