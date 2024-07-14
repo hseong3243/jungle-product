@@ -1,7 +1,7 @@
 <script>
-import OrderCard from "@/component/OrderCard.vue";
-import ProductCard from "@/component/ProductCard.vue";
-import AddProductDialog from "@/component/AddProductDialog.vue";
+import OrderCard from "@/component/order/OrderCard.vue";
+import ProductCard from "@/component/product/ProductCard.vue";
+import AddProductDialog from "@/component/product/AddProductDialog.vue";
 
 export default {
   name: "ProductPage",

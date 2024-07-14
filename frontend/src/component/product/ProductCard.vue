@@ -1,5 +1,5 @@
 <script>
-import UpdateProductAmountDialog from "@/component/UpdateProductAmountDialog.vue";
+import UpdateProductAmountDialog from "@/component/product/UpdateProductAmountDialog.vue";
 
 export default {
   name: "ProductCard",

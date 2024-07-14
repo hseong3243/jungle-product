@@ -1,5 +1,5 @@
 <script>
-import OrderCard from "@/component/OrderCard.vue";
+import OrderCard from "@/component/order/OrderCard.vue";
 
 export default {
   name: "OrderPage",

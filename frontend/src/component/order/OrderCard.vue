@@ -1,5 +1,5 @@
 <script>
-import BuyProductDialog from "@/component/BuyProductDialog.vue";
+import BuyProductDialog from "@/component/order/BuyProductDialog.vue";
 
 export default {
   name: "OrderCard",

@@ -1,7 +1,7 @@
 <script>
-import ProductPage from "@/component/ProductPage.vue";
-import OrderPage from "@/component/OrderPage.vue";
-import AddProductDialog from "@/component/AddProductDialog.vue";
+import ProductPage from "@/component/product/ProductPage.vue";
+import OrderPage from "@/component/order/OrderPage.vue";
+import AddProductDialog from "@/component/product/AddProductDialog.vue";
 
 const ORDER = 'ORDER';
 const PRODUCT = 'PRODUCT';
