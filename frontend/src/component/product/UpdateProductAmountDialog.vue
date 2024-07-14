@@ -4,6 +4,7 @@ import api from "@/axios/index.js";
 export default {
   name: "UpdateProductAmountDialog",
   props: ['product'],
+  emits: ['updateProductAmountEvent'],
   data() {
     return {
       dialog: false,
@@ -22,6 +23,7 @@ export default {
         storageAmount: this.storageAmount,
       }
       await api.patch('/api/products/' + this.product.productId, request);
+      this.$emit('updateProductAmountEvent');
       this.dialog = false;
     },
     clickCancelButton() {

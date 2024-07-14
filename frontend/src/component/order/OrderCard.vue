@@ -5,6 +5,7 @@ export default {
   name: "OrderCard",
   components: {BuyProductDialog},
   props: ['product'],
+  emits: ['buyProductEvent'],
   data() {
     return {
       amount: 0,
@@ -13,6 +14,9 @@ export default {
   methods: {
     consumeCancelBuyProductEvent() {
       this.amount = 0;
+    },
+    consumeBuyProductEvent() {
+      this.$emit('buyProductEvent');
     }
   }
 }
@@ -50,7 +54,8 @@ export default {
       <BuyProductDialog
           :product="product"
           :amount="amount"
-          @cancel-buy-product-event="consumeCancelBuyProductEvent"/>
+          @cancel-buy-product-event="consumeCancelBuyProductEvent"
+      @buy-product-event="consumeBuyProductEvent"/>
     </div>
   </div>
 </template>

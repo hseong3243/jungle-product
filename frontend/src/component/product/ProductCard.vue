@@ -4,7 +4,13 @@ import UpdateProductAmountDialog from "@/component/product/UpdateProductAmountDi
 export default {
   name: "ProductCard",
   components: {UpdateProductAmountDialog},
-  props: ['product']
+  props: ['product'],
+  emits: ['updateProductAmountEvent'],
+  methods: {
+    consumeUpdateProductAmountEvent() {
+      this.$emit('updateProductAmountEvent');
+    }
+  }
 }
 </script>
 
@@ -18,7 +24,9 @@ export default {
     <div>전시 수량: {{ product.displayAmount }}</div>
     <div>박스 재고: {{ product.storageAmount }}</div>
     <div class="d-flex justify-end ga-1 mt-1">
-      <UpdateProductAmountDialog :product="product"/>
+      <UpdateProductAmountDialog
+          :product="product"
+          @update-product-amount-event="consumeUpdateProductAmountEvent"/>
     </div>
   </div>
 </template>

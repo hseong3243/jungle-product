@@ -4,7 +4,7 @@ import api from "@/axios/index.js";
 export default {
   name: "BuyProductDialog",
   props: ['product', 'amount'],
-  emits: ['cancelBuyProductEvent'],
+  emits: ['cancelBuyProductEvent', 'buyProductEvent'],
   data() {
     return {
       dialog: false,
@@ -20,9 +20,9 @@ export default {
         productId: this.product.productId,
         amount: this.amount,
       }
-      console.log(request)
       let response = await api.post('/api/orders', request);
-      console.log(response);
+      this.$emit('buyProductEvent');
+      this.dialog = false;
     }
   }
 }

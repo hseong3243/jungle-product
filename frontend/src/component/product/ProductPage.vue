@@ -45,6 +45,13 @@ export default {
       });
       this.products = response.data.data;
       console.log(this.products)
+    },
+    consumeUpdateProductAmountEvent() {
+      if(this.keyword.length >= 1) {
+        this.searchProducts(this.keyword);
+        return;
+      }
+      this.findAllProducts();
     }
   },
   async mounted() {
@@ -69,7 +76,8 @@ export default {
       <ProductCard
           v-for="product in products"
           :key="product.productId"
-          :product="product">
+          :product="product"
+      @update-product-amount-event="consumeUpdateProductAmountEvent">
       </ProductCard>
     </div>
   </div>

@@ -46,7 +46,13 @@ export default {
         }
       });
       this.products = response.data.data;
-      console.log(this.products)
+    },
+    consumeBuyProductEvent() {
+      if (this.keyword.length >= 1) {
+        this.searchProducts(this.keyword);
+        return;
+      }
+      this.findAllProducts();
     }
   },
 }
@@ -66,7 +72,8 @@ export default {
     <OrderCard
         v-for="product in products"
         :key="product.productId"
-        :product="product">
+        :product="product"
+        @buy-product-event="consumeBuyProductEvent">
     </OrderCard>
   </div>
 </template>
