@@ -1,10 +1,11 @@
 <script>
 import OrderCard from "@/component/OrderCard.vue";
 import ProductCard from "@/component/ProductCard.vue";
+import AddProductDialog from "@/component/AddProductDialog.vue";
 
 export default {
   name: "ProductPage",
-  components: {ProductCard, OrderCard},
+  components: {AddProductDialog, ProductCard, OrderCard},
   data() {
     return {
       products: [
@@ -33,7 +34,7 @@ export default {
           <div class="text-h6">정글 재고 관리</div>
         </v-col>
         <v-col cols="3">
-          <v-btn variant="tonal" color="green-lighten-1">상품 등록</v-btn>
+          <AddProductDialog/>
         </v-col>
       </v-row>
     </v-container>
