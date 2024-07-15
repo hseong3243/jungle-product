@@ -1,14 +1,12 @@
 package com.hseong.jungleproduct.repository;
 
-import com.hseong.jungleproduct.service.ProductRepository;
 import com.hseong.jungleproduct.domain.Product;
+import com.hseong.jungleproduct.service.ProductRepository;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class ProductMemoryRepository implements ProductRepository {
 
     private final Map<Long, Product> products = new ConcurrentHashMap<>();
