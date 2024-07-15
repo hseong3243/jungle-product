@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: classpath:jungle-product-config/application-prod.yml
+
+  jpa:
+    hibernate:
+      ddl-auto: update
