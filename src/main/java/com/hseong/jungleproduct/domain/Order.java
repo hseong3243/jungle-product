@@ -13,7 +13,7 @@ public class Order {
     private final int amount;
     private final ZonedDateTime createdAt = ZonedDateTime.now(ZoneId.of(ASIA_SEOUL));
 
-    private Order(Long orderId, Product product, int amount) {
+    public Order(Long orderId, Product product, int amount) {
         this.orderId = orderId;
         this.product = product;
         this.amount = amount;
