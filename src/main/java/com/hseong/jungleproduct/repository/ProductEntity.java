@@ -27,7 +27,9 @@ public class ProductEntity {
     private int displayAmount = 0;
     private int storageAmount = 0;
 
-    private ProductEntity(String productNumber, String name, int price, int displayAmount, int storageAmount) {
+    private ProductEntity(Long productId, String productNumber, String name, int price, int displayAmount,
+                         int storageAmount) {
+        this.productId = productId;
         this.productNumber = productNumber;
         this.name = name;
         this.price = price;
@@ -36,12 +38,12 @@ public class ProductEntity {
     }
 
     public static ProductEntity from(Product product) {
-        return new ProductEntity(product.getProductId().toString(), product.getName(), product.getPrice(),
+        return new ProductEntity(product.getProductId(), product.getProductNumber().toString(), product.getName(), product.getPrice(),
                 product.getDisplayAmount(), product.getStorageAmount());
     }
 
     public Product toDomain() {
-        Product product = new Product(Long.parseLong(productNumber), name, price);
+        Product product = new Product(productId, Long.parseLong(productNumber), name, price);
         product.initializeInventory(displayAmount, storageAmount);
         return product;
     }

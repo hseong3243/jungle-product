@@ -18,8 +18,8 @@ public class ProductMemoryRepository implements ProductRepository {
 
     @Override
     public Long save(Product product) {
-        products.put(product.getProductId(), product);
-        return product.getProductId();
+        products.put(product.getProductNumber(), product);
+        return product.getProductNumber();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ProductMemoryRepository implements ProductRepository {
     @Override
     public List<Product> search(Long productIdPrefix) {
         return products.values().stream()
-                .filter(product -> product.getProductId().toString().startsWith(productIdPrefix.toString()))
+                .filter(product -> product.getProductNumber().toString().startsWith(productIdPrefix.toString()))
                 .toList();
     }
 }

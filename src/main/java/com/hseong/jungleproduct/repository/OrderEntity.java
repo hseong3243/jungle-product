@@ -30,14 +30,15 @@ public class OrderEntity {
     private int amount;
     private ZonedDateTime createdAt;
 
-    private OrderEntity(ProductEntity product, int amount, ZonedDateTime createdAt) {
+    private OrderEntity(Long orderId, ProductEntity product, int amount, ZonedDateTime createdAt) {
+        this.orderId = orderId;
         this.product = product;
         this.amount = amount;
         this.createdAt = createdAt;
     }
 
     public static OrderEntity from(Order order, ProductEntity product) {
-        return new OrderEntity(product, order.getAmount(), ZonedDateTime.now());
+        return new OrderEntity(order.getOrderId(), product, order.getAmount(), ZonedDateTime.now());
     }
 
     public Order toDomain() {

@@ -22,6 +22,7 @@ public class ProductService {
     public void initializeAmount(Long productId, int displayAmount, int storageAmount) {
         Product product = getProduct(productId);
         product.initializeInventory(displayAmount, storageAmount);
+        productRepository.save(product);
     }
 
     public ProductDto findProduct(Long productId) {
