@@ -47,4 +47,10 @@ public class ProductEntity {
         product.initializeInventory(displayAmount, storageAmount);
         return product;
     }
+
+    public void update(Product product) {
+        this.price = product.getPrice();
+        this.displayAmount = product.getDisplayAmount();
+        this.storageAmount = product.getStorageAmount();
+    }
 }

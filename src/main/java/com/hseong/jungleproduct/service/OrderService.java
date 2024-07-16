@@ -15,8 +15,8 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
 
-    public Long buyProduct(Long productId, int amount) {
-        Product product = productRepository.findByProductNumber(productId)
+    public Long buyProduct(Long productNumber, int amount) {
+        Product product = productRepository.findByProductNumber(productNumber)
                 .orElseThrow(NoSuchElementException::new);
         Order order = Order.buy(product, amount);
         return orderRepository.save(order);
