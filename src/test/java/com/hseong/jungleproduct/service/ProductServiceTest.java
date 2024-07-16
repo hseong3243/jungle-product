@@ -37,9 +37,9 @@ class ProductServiceTest {
             Long savedProductId = productService.addProduct(productId, name, price);
 
             //then
-            Optional<Product> optionalProduct = productRepository.findById(productId);
+            Optional<Product> optionalProduct = productRepository.findByProductNumber(productId);
             assertThat(optionalProduct).isNotEmpty().get().satisfies(product -> {
-                assertThat(product.getProductId()).isEqualTo(productId);
+                assertThat(product.getProductNumber()).isEqualTo(productId);
                 assertThat(product.getName()).isEqualTo(name);
                 assertThat(product.getPrice()).isEqualTo(price);
             });
@@ -63,7 +63,7 @@ class ProductServiceTest {
             productRepository.save(product);
 
             //when
-            productService.initializeAmount(product.getProductId(), 10, 20);
+            productService.initializeAmount(product.getProductNumber(), 10, 20);
 
             //then
             assertThat(product.getDisplayAmount()).isEqualTo(10);
@@ -89,10 +89,10 @@ class ProductServiceTest {
             productRepository.save(product);
 
             //when
-            ProductDto productDto = productService.findProduct(product.getProductId());
+            ProductDto productDto = productService.findProduct(product.getProductNumber());
 
             //then
-            assertThat(productDto.productId()).isEqualTo(product.getProductId());
+            assertThat(productDto.productId()).isEqualTo(product.getProductNumber());
             assertThat(productDto.name()).isEqualTo(product.getName());
             assertThat(productDto.price()).isEqualTo(product.getPrice());
             assertThat(productDto.displayAmount()).isEqualTo(product.getDisplayAmount());
@@ -155,7 +155,7 @@ class ProductServiceTest {
             //then
             assertThat(productDtos).hasSize(2)
                     .map(ProductDto::productId)
-                    .contains(productA.getProductId(), productB.getProductId());
+                    .contains(productA.getProductNumber(), productB.getProductNumber());
         }
     }
 }

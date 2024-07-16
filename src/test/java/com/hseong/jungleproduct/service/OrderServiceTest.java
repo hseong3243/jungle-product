@@ -43,7 +43,7 @@ class OrderServiceTest {
             //given
 
             //when
-            Long orderId = orderService.buyProduct(product.getProductId(), 5);
+            Long orderId = orderService.buyProduct(product.getProductNumber(), 5);
 
             //then
             Optional<Order> optionalOrder = orderRepository.findById(orderId);
@@ -58,7 +58,7 @@ class OrderServiceTest {
             //given
 
             //when
-            orderService.buyProduct(product.getProductId(), 5);
+            orderService.buyProduct(product.getProductNumber(), 5);
 
             //then
             assertThat(product.getDisplayAmount()).isEqualTo(5);
@@ -69,7 +69,7 @@ class OrderServiceTest {
             //given
 
             //when
-            orderService.buyProduct(product.getProductId(), 5);
+            orderService.buyProduct(product.getProductNumber(), 5);
 
             //then
             assertThat(product.getStorageAmount()).isEqualTo(40);
@@ -80,7 +80,7 @@ class OrderServiceTest {
             //given
 
             //when
-            Long orderId = orderService.buyProduct(product.getProductId(), 20);
+            Long orderId = orderService.buyProduct(product.getProductNumber(), 20);
 
             //then
             assertThat(product.getDisplayAmount()).isEqualTo(-10);

@@ -1,0 +1,4 @@
+[submodule "src/main/resources/jungle-product-config"]
+	path = src/main/resources/jungle-product-config
+	url = https://github.com/hseong3243/jungle-product-config.git
+	branch = main

@@ -8,13 +8,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
     private Long productId;
+    private Long productNumber;
     private String name;
     private int price;
     private int displayAmount = 0;
     private int storageAmount = 0;
 
-    public Product(Long productId, String name, int price) {
+    public Product(Long productNumber, String name, int price) {
+        this(null, productNumber, name, price);
+    }
+
+    public Product(Long productId, Long productNumber, String name, int price) {
         this.productId = productId;
+        this.productNumber = productNumber;
         this.name = name;
         this.price = price;
     }

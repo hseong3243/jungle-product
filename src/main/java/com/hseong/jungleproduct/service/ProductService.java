@@ -22,6 +22,7 @@ public class ProductService {
     public void initializeAmount(Long productId, int displayAmount, int storageAmount) {
         Product product = getProduct(productId);
         product.initializeInventory(displayAmount, storageAmount);
+        productRepository.save(product);
     }
 
     public ProductDto findProduct(Long productId) {
@@ -37,7 +38,7 @@ public class ProductService {
     }
 
     private Product getProduct(Long productId) {
-        return productRepository.findById(productId)
+        return productRepository.findByProductNumber(productId)
                 .orElseThrow(NoSuchElementException::new);
     }
 
