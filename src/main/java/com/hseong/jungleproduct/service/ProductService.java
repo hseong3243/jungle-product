@@ -38,7 +38,7 @@ public class ProductService {
     }
 
     private Product getProduct(Long productId) {
-        return productRepository.findById(productId)
+        return productRepository.findByProductNumber(productId)
                 .orElseThrow(NoSuchElementException::new);
     }
 

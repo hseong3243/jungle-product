@@ -12,8 +12,8 @@ public class ProductMemoryRepository implements ProductRepository {
     private final Map<Long, Product> products = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<Product> findById(Long productId) {
-        return Optional.ofNullable(products.get(productId));
+    public Optional<Product> findByProductNumber(Long productNumber) {
+        return Optional.ofNullable(products.get(productNumber));
     }
 
     @Override

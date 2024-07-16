@@ -37,7 +37,7 @@ class ProductServiceTest {
             Long savedProductId = productService.addProduct(productId, name, price);
 
             //then
-            Optional<Product> optionalProduct = productRepository.findById(productId);
+            Optional<Product> optionalProduct = productRepository.findByProductNumber(productId);
             assertThat(optionalProduct).isNotEmpty().get().satisfies(product -> {
                 assertThat(product.getProductNumber()).isEqualTo(productId);
                 assertThat(product.getName()).isEqualTo(name);

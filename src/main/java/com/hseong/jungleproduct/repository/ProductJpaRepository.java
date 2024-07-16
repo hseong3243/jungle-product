@@ -14,8 +14,8 @@ public class ProductJpaRepository implements ProductRepository {
     private final ProductDataJpaRepository productDataJpaRepository;
 
     @Override
-    public Optional<Product> findById(Long productId) {
-        return productDataJpaRepository.findByProductNumber(String.valueOf(productId))
+    public Optional<Product> findByProductNumber(Long productNumber) {
+        return productDataJpaRepository.findByProductNumber(String.valueOf(productNumber))
                 .map(ProductEntity::toDomain);
     }
 
