@@ -1,6 +1,7 @@
 package com.hseong.jungleproduct.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hseong.jungleproduct.service.LoginService;
 import com.hseong.jungleproduct.service.OrderService;
 import com.hseong.jungleproduct.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,7 @@ public abstract class BaseControllerTest {
 
     @MockBean
     protected OrderService orderService;
+
+    @MockBean
+    protected LoginService loginService;
 }
