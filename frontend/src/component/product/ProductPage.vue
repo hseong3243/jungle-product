@@ -18,7 +18,7 @@ export default {
         <div class="text-h6 text-center">정글 재고 관리</div>
       </v-col>
       <v-col cols="3">
-        <AddProductDialog v-if="page === 'PRODUCT'"/>
+        <AddProductDialog/>
       </v-col>
     </v-row>
     <v-row>
