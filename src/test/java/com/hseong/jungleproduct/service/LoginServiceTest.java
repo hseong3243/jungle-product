@@ -81,21 +81,21 @@ class LoginServiceTest {
         }
 
         @Test
-        @DisplayName("아이디, 패스워드가 일치하면 아무것도 반환하지 않고 종료한다.")
+        @DisplayName("아이디, 패스워드가 일치하면 회원 ID를 반환한다.")
         void login() {
             //given
             String username = "username";
             String rawPassword = "password";
             String encodedPassword = passwordEncoder.encode(rawPassword);
-            Member member = new Member(username, encodedPassword, MemberRole.ADMIN);
+            Member member = new Member(1L, username, encodedPassword, MemberRole.ADMIN);
 
             memberRepository.stub(member);
 
             //when
-            Exception exception = catchException(() -> loginService.login(username, rawPassword));
+            Long memberId = loginService.login(username, rawPassword);
 
             //then
-            assertThat(exception).doesNotThrowAnyException();
+            assertThat(memberId).isEqualTo(1);
         }
     }
 }
