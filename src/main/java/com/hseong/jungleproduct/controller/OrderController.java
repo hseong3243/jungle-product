@@ -1,5 +1,6 @@
 package com.hseong.jungleproduct.controller;
 
+import com.hseong.jungleproduct.controller.request.BuyProductRequest;
 import com.hseong.jungleproduct.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
