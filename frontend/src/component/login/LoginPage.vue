@@ -1,9 +1,14 @@
 <script>
 import api from "@/axios/index.js";
 import router from "@/router/router.js";
+import {useAuthStore} from "@/store/AuthStore.js";
 
 export default {
   name: "LoginPage",
+  setup() {
+    const authStore = useAuthStore();
+    return {authStore}
+  },
   data() {
     return {
       username: "",
@@ -11,26 +16,10 @@ export default {
     }
   },
   methods: {
-    clickLoginButton() {
-      if (this.loginApiCall()) {
-        router.replace('/');
-      }
+    async clickLoginButton() {
+      await this.authStore.loginApiCall(this.username, this.password);
+      await router.replace('/');
     },
-    async loginApiCall() {
-      const request = {
-        username: this.username,
-        password: this.password
-      };
-      const response = await api.post("/api/login", request);
-
-      const status = response.status;
-      if (status === 404) {
-        alert("아이디/패스워드가 올바르지 않습니다.");
-        this.password = "";
-        return false;
-      }
-      return true;
-    }
   }
 }
 </script>
