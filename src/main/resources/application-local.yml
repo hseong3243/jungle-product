@@ -1,0 +1,19 @@
+jwt:
+  issuer: test
+  expiry-seconds: 3600
+  secret: bAM5hBSuhrVhI6aVvNPk1r9rR3n8Ar4Atest
+  refresh-expiry-seconds: 18000
+  refresh-secret: cjOYckwZQhEqZOCZCCjCIG4W0HFPfSjMtest
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop

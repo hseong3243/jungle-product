@@ -1,0 +1,6 @@
+jwt:
+  issuer: test
+  expiry-seconds: 600
+  secret: asdfasdfadsfasdfasfasdfasdafdfaafsd
+  refresh-expiry-seconds: 1200
+  refresh-secret: asdfasdfasdfasdfasdfasdfadsfasdfafdfasdfas

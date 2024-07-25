@@ -28,7 +28,8 @@ class OrderControllerTest extends BaseControllerTest {
         //when
         ResultActions result = mockMvc.perform(post("/api/orders")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(request)));
+                .content(objectMapper.writeValueAsBytes(request))
+                .header(AUTHORIZATION_HEADER, accessToken));
 
         //then
         result.andDo(print())

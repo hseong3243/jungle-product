@@ -1,7 +1,17 @@
 spring:
   config:
+    activate:
+      on-profile: prod
     import: classpath:jungle-product-config/application-prod.yml
-
   jpa:
     hibernate:
       ddl-auto: update
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: classpath:application-local.yml

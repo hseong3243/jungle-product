@@ -2,16 +2,12 @@ package com.hseong.jungleproduct.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchException;
-import static org.junit.jupiter.api.Assertions.*;
 
+import com.hseong.jungleproduct.auth.JwtProvider;
 import com.hseong.jungleproduct.domain.Member;
 import com.hseong.jungleproduct.domain.MemberRole;
 import com.hseong.jungleproduct.stub.MemberStubRepository;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -21,6 +17,7 @@ class LoginServiceTest {
 
     private LoginService loginService;
     private MemberStubRepository memberRepository;
+    private JwtProvider jwtProvider;
     private PasswordEncoder passwordEncoder;
 
     @BeforeEach
@@ -37,7 +34,14 @@ class LoginServiceTest {
                 return new StringBuilder(encodedPassword).reverse().toString().equals(rawPassword);
             }
         };
-        loginService = new LoginService(memberRepository, passwordEncoder);
+        jwtProvider = new JwtProvider(
+                "test",
+                600,
+                1200,
+                "asdfasdfadsfasdfasfasdfasdafdfaafsd",
+                "asdfasdfasdfasdfasdfasdfadsfasdfafdfasdfas"
+        );
+        loginService = new LoginService(memberRepository, passwordEncoder, jwtProvider);
     }
 
     @Nested
@@ -81,7 +85,7 @@ class LoginServiceTest {
         }
 
         @Test
-        @DisplayName("아이디, 패스워드가 일치하면 회원 ID를 반환한다.")
+        @DisplayName("아이디, 패스워드가 일치하면 토큰를 반환한다.")
         void login() {
             //given
             String username = "username";
@@ -92,10 +96,11 @@ class LoginServiceTest {
             memberRepository.stub(member);
 
             //when
-            Long memberId = loginService.login(username, rawPassword);
+            LoginResponse response = loginService.login(username, rawPassword);
 
             //then
-            assertThat(memberId).isEqualTo(1);
+            assertThat(response.memberId()).isEqualTo(member.getMemberId());
+            assertThat(response.accessToken()).isNotBlank();
         }
     }
 }
