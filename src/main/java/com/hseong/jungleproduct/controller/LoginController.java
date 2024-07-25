@@ -1,7 +1,7 @@
 package com.hseong.jungleproduct.controller;
 
-import com.hseong.jungleproduct.auth.TokenResponse;
 import com.hseong.jungleproduct.controller.request.LoginRequest;
+import com.hseong.jungleproduct.service.LoginResponse;
 import com.hseong.jungleproduct.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +17,8 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public ApiResponse<TokenResponse> login(@RequestBody LoginRequest request) {
-        TokenResponse token = loginService.login(request.username(), request.password());
-        return ApiResponse.success(token);
+    public ApiResponse<LoginResponse> login(@RequestBody LoginRequest request) {
+        LoginResponse response = loginService.login(request.username(), request.password());
+        return ApiResponse.success(response);
     }
 }

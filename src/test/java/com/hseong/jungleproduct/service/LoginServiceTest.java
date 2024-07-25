@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchException;
 
 import com.hseong.jungleproduct.auth.JwtProvider;
-import com.hseong.jungleproduct.auth.TokenResponse;
 import com.hseong.jungleproduct.domain.Member;
 import com.hseong.jungleproduct.domain.MemberRole;
 import com.hseong.jungleproduct.stub.MemberStubRepository;
@@ -97,10 +96,11 @@ class LoginServiceTest {
             memberRepository.stub(member);
 
             //when
-            TokenResponse token = loginService.login(username, rawPassword);
+            LoginResponse response = loginService.login(username, rawPassword);
 
             //then
-            assertThat(token.accessToken()).isNotBlank();
+            assertThat(response.memberId()).isEqualTo(member.getMemberId());
+            assertThat(response.accessToken()).isNotBlank();
         }
     }
 }

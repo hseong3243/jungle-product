@@ -17,11 +17,12 @@ public class LoginService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
-    public TokenResponse login(String username, String password) {
+    public LoginResponse login(String username, String password) {
         Member member = memberRepository.findByUsername(username)
             .orElseThrow(() -> new NoSuchElementException("존재하지 않는 회원입니다."));
         member.checkPassword(passwordEncoder, password);
 
-        return jwtProvider.createToken(member.getMemberId(), member.getMemberRole());
+        TokenResponse token = jwtProvider.createToken(member.getMemberId(), member.getMemberRole());
+        return LoginResponse.of(member, token);
     }
 }
