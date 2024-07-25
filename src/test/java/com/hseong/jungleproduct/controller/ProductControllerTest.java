@@ -36,7 +36,8 @@ class ProductControllerTest extends BaseControllerTest {
         //when
         ResultActions result = mockMvc.perform(post("/api/products")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(request)));
+                .content(objectMapper.writeValueAsBytes(request))
+                .header(AUTHORIZATION_HEADER, accessToken));
 
         //then
         result.andDo(print())
@@ -55,7 +56,8 @@ class ProductControllerTest extends BaseControllerTest {
         given(productService.findAll()).willReturn(products);
 
         //when
-        ResultActions result = mockMvc.perform(get("/api/products"));
+        ResultActions result = mockMvc.perform(get("/api/products")
+                .header(AUTHORIZATION_HEADER, accessToken));
 
         //then
         result.andDo(print())
@@ -75,6 +77,7 @@ class ProductControllerTest extends BaseControllerTest {
 
         //when
         ResultActions result = mockMvc.perform(get("/api/products/search")
+                .header(AUTHORIZATION_HEADER, accessToken)
                 .param("productId", String.valueOf(productIdPrefix)));
 
         //then
@@ -91,6 +94,7 @@ class ProductControllerTest extends BaseControllerTest {
 
         //when
         ResultActions result = mockMvc.perform(patch("/api/products/{productId}", 1L)
+                .header(AUTHORIZATION_HEADER, accessToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(request)));
 
@@ -109,7 +113,8 @@ class ProductControllerTest extends BaseControllerTest {
         given(productService.findProduct(anyLong())).willReturn(productDto);
 
         //when
-        ResultActions result = mockMvc.perform(get("/api/products/{productId}", 1L));
+        ResultActions result = mockMvc.perform(get("/api/products/{productId}", 1L)
+                .header(AUTHORIZATION_HEADER, accessToken));
 
         //then
         result.andDo(print())
