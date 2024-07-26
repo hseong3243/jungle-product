@@ -11,7 +11,7 @@ import com.hseong.jungleproduct.base.BaseControllerTest;
 import com.hseong.jungleproduct.controller.request.LoginRequest;
 import com.hseong.jungleproduct.domain.Member;
 import com.hseong.jungleproduct.domain.MemberRole;
-import com.hseong.jungleproduct.service.LoginResponse;
+import com.hseong.jungleproduct.service.response.LoginResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;

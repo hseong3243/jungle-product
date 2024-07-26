@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.catchException;
 import com.hseong.jungleproduct.auth.JwtProvider;
 import com.hseong.jungleproduct.domain.Member;
 import com.hseong.jungleproduct.domain.MemberRole;
+import com.hseong.jungleproduct.service.response.LoginResponse;
 import com.hseong.jungleproduct.stub.MemberStubRepository;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;

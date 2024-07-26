@@ -3,6 +3,7 @@ package com.hseong.jungleproduct.service;
 import com.hseong.jungleproduct.auth.JwtProvider;
 import com.hseong.jungleproduct.auth.TokenResponse;
 import com.hseong.jungleproduct.domain.Member;
+import com.hseong.jungleproduct.service.response.LoginResponse;
 import jakarta.transaction.Transactional;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;

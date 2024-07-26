@@ -2,7 +2,7 @@ package com.hseong.jungleproduct.controller;
 
 import com.hseong.jungleproduct.controller.request.AddProductRequest;
 import com.hseong.jungleproduct.controller.request.UpdateProductRequest;
-import com.hseong.jungleproduct.service.ProductDto;
+import com.hseong.jungleproduct.service.response.ProductDto;
 import com.hseong.jungleproduct.service.ProductService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

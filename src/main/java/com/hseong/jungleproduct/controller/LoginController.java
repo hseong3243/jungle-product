@@ -1,7 +1,7 @@
 package com.hseong.jungleproduct.controller;
 
 import com.hseong.jungleproduct.controller.request.LoginRequest;
-import com.hseong.jungleproduct.service.LoginResponse;
+import com.hseong.jungleproduct.service.response.LoginResponse;
 import com.hseong.jungleproduct.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

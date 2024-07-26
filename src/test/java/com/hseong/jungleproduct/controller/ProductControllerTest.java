@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.hseong.jungleproduct.base.BaseControllerTest;
 import com.hseong.jungleproduct.controller.request.AddProductRequest;
 import com.hseong.jungleproduct.controller.request.UpdateProductRequest;
-import com.hseong.jungleproduct.service.ProductDto;
+import com.hseong.jungleproduct.service.response.ProductDto;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

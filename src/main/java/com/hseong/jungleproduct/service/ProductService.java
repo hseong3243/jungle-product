@@ -1,6 +1,7 @@
 package com.hseong.jungleproduct.service;
 
 import com.hseong.jungleproduct.domain.Product;
+import com.hseong.jungleproduct.service.response.ProductDto;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;

@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hseong.jungleproduct.domain.Product;
 import com.hseong.jungleproduct.repository.ProductMemoryRepository;
+import com.hseong.jungleproduct.service.response.ProductDto;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.hseong.jungleproduct.service;
+package com.hseong.jungleproduct.service.response;
 
 import com.hseong.jungleproduct.domain.Product;
 
