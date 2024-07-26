@@ -14,6 +14,13 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 
+// dayjs
+import dayjs from "dayjs";
+import 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.locale('ko')
+dayjs.extend(relativeTime)
+
 // Components
 import App from './App.vue'
 
@@ -26,4 +33,5 @@ createApp(App)
     .use(vuetify)
     .use(router)
     .use(pinia)
+    .use(dayjs)
     .mount('#app');
