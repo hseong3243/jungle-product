@@ -2,6 +2,8 @@ package com.hseong.jungleproduct.config;
 
 import com.hseong.jungleproduct.auth.JwtAuthenticationFilter;
 import com.hseong.jungleproduct.auth.JwtProvider;
+import com.hseong.jungleproduct.service.BCryptPasswordEncoder;
+import com.hseong.jungleproduct.service.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -35,5 +37,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder());
     }
 }
