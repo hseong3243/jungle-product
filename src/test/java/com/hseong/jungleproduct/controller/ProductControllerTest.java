@@ -50,7 +50,7 @@ class ProductControllerTest extends BaseControllerTest {
     @DisplayName("GET /api/products 호출 시 모든 상품 목록을 반환한다.")
     void findProducts() throws Exception {
         //given
-        ProductDto productDto = new ProductDto(1L, "미니얼룩말", 24000, 10, 30);
+        ProductDto productDto = new ProductDto(1L, 13423L, "미니얼룩말", 24000, 10, 30);
         List<ProductDto> products = List.of(productDto);
 
         given(productService.findAll()).willReturn(products);
@@ -70,7 +70,7 @@ class ProductControllerTest extends BaseControllerTest {
     void test() throws Exception {
         //given
         Long productIdPrefix = 23L;
-        ProductDto productDto = new ProductDto(1L, "미니얼룩말", 24000, 10, 30);
+        ProductDto productDto = new ProductDto(1L, 1214L, "미니얼룩말", 24000, 10, 30);
         List<ProductDto> products = List.of(productDto);
 
         given(productService.searchProduct(anyLong())).willReturn(products);
@@ -108,7 +108,7 @@ class ProductControllerTest extends BaseControllerTest {
     @DisplayName("GET /api/products/{productId} 호출 시 단일 상품 정보를 반환한다.")
     void findProduct() throws Exception {
         //given
-        ProductDto productDto = new ProductDto(1235L, "미니얼룩말", 24000, 10, 30);
+        ProductDto productDto = new ProductDto(1L, 1235L, "미니얼룩말", 24000, 10, 30);
 
         given(productService.findProduct(anyLong())).willReturn(productDto);
 
