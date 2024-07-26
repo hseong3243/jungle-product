@@ -3,7 +3,7 @@ package com.hseong.jungleproduct.service.response;
 import java.util.List;
 
 public record FindOrdersResponse(
-        List<OrderDto> orderDtos,
+        List<OrderDto> orders,
         int totalPages,
         long totalElements
 ) {
