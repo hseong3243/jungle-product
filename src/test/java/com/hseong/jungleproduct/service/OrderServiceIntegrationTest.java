@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hseong.jungleproduct.base.DatabaseCleaner;
 import com.hseong.jungleproduct.domain.Product;
+import com.hseong.jungleproduct.service.response.FindOrdersResponse;
+import com.hseong.jungleproduct.service.response.OrderDto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import java.util.List;
@@ -76,12 +78,20 @@ class OrderServiceIntegrationTest {
             Long productId = productService.addProduct(4352L, "미니얼룩말", 24000);
             productService.initializeAmount(productId, 30, 50);
 
-            productService.findProduct(productId);
+            Long orderIdA = orderService.buyProduct(productId, 3);
+            Long orderIdB = orderService.buyProduct(productId, 3);
+            Long orderIdC = orderService.buyProduct(productId, 3);
+            Long orderIdD = orderService.buyProduct(productId, 3);
+            Long orderIdE = orderService.buyProduct(productId, 3);
+            Long orderIdF = orderService.buyProduct(productId, 3);
 
             //when
+            FindOrdersResponse orders = orderService.findOrders(0, 10);
 
             //then
-
+            List<OrderDto> orderDtos = orders.orderDtos();
+            assertThat(orderDtos).map(OrderDto::orderId)
+                    .containsExactly(orderIdF, orderIdE, orderIdD, orderIdC, orderIdB, orderIdA);
         }
     }
 }

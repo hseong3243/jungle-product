@@ -2,10 +2,13 @@ package com.hseong.jungleproduct.repository;
 
 import com.hseong.jungleproduct.domain.Order;
 import com.hseong.jungleproduct.service.OrderRepository;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 public class OrderMemoryRepository implements OrderRepository {
 
@@ -20,6 +23,12 @@ public class OrderMemoryRepository implements OrderRepository {
     @Override
     public Optional<Order> findById(Long orderId) {
         return Optional.ofNullable(orders.get(orderId));
+    }
+
+    @Override
+    public Page<Order> findOrdersOrderByCreatedAt(int page, int size) {
+        List<Order> content = orders.values().stream().limit(size).toList();
+        return new PageImpl<>(content, PageRequest.of(page, size), orders.size());
     }
 
     private long getNextId() {
