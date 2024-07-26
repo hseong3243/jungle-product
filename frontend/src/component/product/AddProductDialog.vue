@@ -5,7 +5,7 @@ export default {
   name: "AddProductDialog",
   data() {
     return {
-      productId: "",
+      productNumber: "",
       name: "",
       price: 0,
       dialog: false,
@@ -14,7 +14,7 @@ export default {
   methods: {
     async clickAddProductButton() {
       const request = {
-        productId: this.productId,
+        productNumber: this.productNumber,
         name: this.name,
         price: this.price,
       }
@@ -23,7 +23,7 @@ export default {
       this.dialog = false;
     },
     clickCancelButton() {
-      this.productId = "";
+      this.productNumber = "";
       this.name = "";
       this.price = 0;
       this.dialog = false;
@@ -59,7 +59,7 @@ export default {
           <v-row>
             <v-col class="d-flex flex-column">
               <v-text-field
-                  v-model="productId"
+                  v-model="productNumber"
                   variant="outlined"
                   label="품번"
                   density="comfortable"></v-text-field>

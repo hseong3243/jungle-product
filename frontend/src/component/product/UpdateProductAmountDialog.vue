@@ -62,7 +62,7 @@ export default {
           <v-row>
             <v-col class="d-flex flex-column">
               <div>
-                품번: {{ product.productId }}
+                품번: {{ product.productNumber }}
               </div>
               <div>
                 상품명: {{ product.name }}
