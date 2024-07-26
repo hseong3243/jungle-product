@@ -78,7 +78,7 @@ class ProductControllerTest extends BaseControllerTest {
         //when
         ResultActions result = mockMvc.perform(get("/api/products/search")
                 .header(AUTHORIZATION_HEADER, accessToken)
-                .param("productId", String.valueOf(productIdPrefix)));
+                .param("productNumber", String.valueOf(productIdPrefix)));
 
         //then
         result.andDo(print())

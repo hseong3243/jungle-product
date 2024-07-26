@@ -21,13 +21,13 @@ public class ProductService {
     }
 
     public void initializeAmount(Long productId, int displayAmount, int storageAmount) {
-        Product product = getProduct(productId);
+        Product product = getProductById(productId);
         product.initializeInventory(displayAmount, storageAmount);
         productRepository.save(product);
     }
 
     public ProductDto findProduct(Long productId) {
-        Product product = getProduct(productId);
+        Product product = getProductById(productId);
         return ProductDto.from(product);
     }
 
@@ -38,13 +38,18 @@ public class ProductService {
                 .toList();
     }
 
-    private Product getProduct(Long productId) {
-        return productRepository.findByProductNumber(productId)
+    private Product getProductByNumber(Long productNumber) {
+        return productRepository.findByProductNumber(productNumber)
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public List<ProductDto> searchProduct(Long productIdPrefix) {
-        List<Product> products = productRepository.search(productIdPrefix);
+    private Product getProductById(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    public List<ProductDto> searchProduct(Long productNumberPrefix) {
+        List<Product> products = productRepository.search(productNumberPrefix);
         return products.stream()
                 .map(ProductDto::from)
                 .toList();

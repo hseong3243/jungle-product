@@ -61,10 +61,10 @@ class ProductServiceTest {
         @Test
         void 상품_재고를_초기화합니다() {
             //given
-            productRepository.save(product);
+            Long productId = productRepository.save(product);
 
             //when
-            productService.initializeAmount(product.getProductNumber(), 10, 20);
+            productService.initializeAmount(productId, 10, 20);
 
             //then
             assertThat(product.getDisplayAmount()).isEqualTo(10);
@@ -80,20 +80,20 @@ class ProductServiceTest {
 
         @BeforeEach
         void setUp() {
-            product = new Product(2345L, "미니얼룩말", 24000);
+            product = new Product(1L, 2345L, "미니얼룩말", 24000);
             product.initializeInventory(10, 20);
         }
 
         @Test
         void 단일_상품을_조회합니다() {
             //given
-            productRepository.save(product);
+            Long productId = productRepository.save(product);
 
             //when
-            ProductDto productDto = productService.findProduct(product.getProductNumber());
+            ProductDto productDto = productService.findProduct(productId);
 
             //then
-            assertThat(productDto.productId()).isEqualTo(product.getProductNumber());
+            assertThat(productDto.productNumber()).isEqualTo(product.getProductNumber());
             assertThat(productDto.name()).isEqualTo(product.getName());
             assertThat(productDto.price()).isEqualTo(product.getPrice());
             assertThat(productDto.displayAmount()).isEqualTo(product.getDisplayAmount());
@@ -155,7 +155,7 @@ class ProductServiceTest {
 
             //then
             assertThat(productDtos).hasSize(2)
-                    .map(ProductDto::productId)
+                    .map(ProductDto::productNumber)
                     .contains(productA.getProductNumber(), productB.getProductNumber());
         }
     }

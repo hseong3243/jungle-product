@@ -27,7 +27,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/products")
     public ApiResponse<Long> addProduct(@RequestBody AddProductRequest request) {
-        Long productId = productService.addProduct(request.productId(), request.name(), request.price());
+        Long productId = productService.addProduct(request.productNumber(), request.name(), request.price());
         return ApiResponse.success(productId);
     }
 
@@ -40,8 +40,8 @@ public class ProductController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/products/search")
-    public ApiResponse<List<ProductDto>> searchProducts(@RequestParam("productId") Long productId) {
-        List<ProductDto> productDtos = productService.searchProduct(productId);
+    public ApiResponse<List<ProductDto>> searchProducts(@RequestParam("productNumber") Long productNumber) {
+        List<ProductDto> productDtos = productService.searchProduct(productNumber);
         return ApiResponse.success(productDtos);
     }
 
