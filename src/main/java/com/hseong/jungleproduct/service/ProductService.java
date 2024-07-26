@@ -15,8 +15,8 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public Long addProduct(Long productId, String name, int price) {
-        Product product = new Product(productId, name, price);
+    public Long addProduct(Long productNumber, String name, int price) {
+        Product product = new Product(productNumber, name, price);
         return productRepository.save(product);
     }
 
