@@ -11,16 +11,17 @@ public class Order {
     private final Long orderId;
     private final Product product;
     private final int amount;
-    private final ZonedDateTime createdAt = ZonedDateTime.now(ZoneId.of(ASIA_SEOUL));
+    private final ZonedDateTime createdAt;
 
-    public Order(Long orderId, Product product, int amount) {
+    public Order(Long orderId, Product product, int amount, ZonedDateTime createdAt) {
         this.orderId = orderId;
         this.product = product;
         this.amount = amount;
+        this.createdAt = createdAt;
     }
 
     public static Order buy(Product product, int amount) {
         product.buy(amount);
-        return new Order(null, product, amount);
+        return new Order(null, product, amount, ZonedDateTime.now(ZoneId.of(ASIA_SEOUL)));
     }
 }

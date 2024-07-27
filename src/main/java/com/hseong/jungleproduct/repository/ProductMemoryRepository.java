@@ -13,13 +13,18 @@ public class ProductMemoryRepository implements ProductRepository {
 
     @Override
     public Optional<Product> findByProductNumber(Long productNumber) {
-        return Optional.ofNullable(products.get(productNumber));
+        return products.values().stream().filter(p -> p.getProductNumber().equals(productNumber)).findFirst();
     }
 
     @Override
     public Long save(Product product) {
-        products.put(product.getProductNumber(), product);
-        return product.getProductNumber();
+        Long nextProductId = getNextProductId();
+        products.put(nextProductId, product);
+        return nextProductId;
+    }
+
+    private Long getNextProductId() {
+        return (long) (products.size() + 1);
     }
 
     @Override
@@ -28,9 +33,14 @@ public class ProductMemoryRepository implements ProductRepository {
     }
 
     @Override
-    public List<Product> search(Long productIdPrefix) {
+    public List<Product> search(Long productNumberPrefix) {
         return products.values().stream()
-                .filter(product -> product.getProductNumber().toString().startsWith(productIdPrefix.toString()))
+                .filter(product -> product.getProductNumber().toString().startsWith(productNumberPrefix.toString()))
                 .toList();
+    }
+
+    @Override
+    public Optional<Product> findById(Long productId) {
+        return Optional.ofNullable(products.get(productId));
     }
 }

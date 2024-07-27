@@ -13,7 +13,8 @@ export default {
       keyword: "",
       products: [
         {
-          productId: 2324,
+          productId: 1,
+          productNumber: 2324,
           name: '미니얼룩말',
           price: 24000,
           displayAmount: 0,
@@ -40,7 +41,7 @@ export default {
       }
       let response = await api.get('/api/products/search', {
         params: {
-          productId: prefix
+          productNumber: prefix
         }
       });
       this.products = response.data.data;

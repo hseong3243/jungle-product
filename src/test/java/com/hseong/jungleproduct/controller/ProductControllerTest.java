@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.hseong.jungleproduct.base.BaseControllerTest;
 import com.hseong.jungleproduct.controller.request.AddProductRequest;
 import com.hseong.jungleproduct.controller.request.UpdateProductRequest;
-import com.hseong.jungleproduct.service.ProductDto;
+import com.hseong.jungleproduct.service.response.ProductDto;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,7 +50,7 @@ class ProductControllerTest extends BaseControllerTest {
     @DisplayName("GET /api/products 호출 시 모든 상품 목록을 반환한다.")
     void findProducts() throws Exception {
         //given
-        ProductDto productDto = new ProductDto(1L, "미니얼룩말", 24000, 10, 30);
+        ProductDto productDto = new ProductDto(1L, 13423L, "미니얼룩말", 24000, 10, 30);
         List<ProductDto> products = List.of(productDto);
 
         given(productService.findAll()).willReturn(products);
@@ -70,7 +70,7 @@ class ProductControllerTest extends BaseControllerTest {
     void test() throws Exception {
         //given
         Long productIdPrefix = 23L;
-        ProductDto productDto = new ProductDto(1L, "미니얼룩말", 24000, 10, 30);
+        ProductDto productDto = new ProductDto(1L, 1214L, "미니얼룩말", 24000, 10, 30);
         List<ProductDto> products = List.of(productDto);
 
         given(productService.searchProduct(anyLong())).willReturn(products);
@@ -78,7 +78,7 @@ class ProductControllerTest extends BaseControllerTest {
         //when
         ResultActions result = mockMvc.perform(get("/api/products/search")
                 .header(AUTHORIZATION_HEADER, accessToken)
-                .param("productId", String.valueOf(productIdPrefix)));
+                .param("productNumber", String.valueOf(productIdPrefix)));
 
         //then
         result.andDo(print())
@@ -108,7 +108,7 @@ class ProductControllerTest extends BaseControllerTest {
     @DisplayName("GET /api/products/{productId} 호출 시 단일 상품 정보를 반환한다.")
     void findProduct() throws Exception {
         //given
-        ProductDto productDto = new ProductDto(1235L, "미니얼룩말", 24000, 10, 30);
+        ProductDto productDto = new ProductDto(1L, 1235L, "미니얼룩말", 24000, 10, 30);
 
         given(productService.findProduct(anyLong())).willReturn(productDto);
 

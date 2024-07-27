@@ -43,9 +43,7 @@ public class ProductEntity {
     }
 
     public Product toDomain() {
-        Product product = new Product(productId, Long.parseLong(productNumber), name, price);
-        product.initializeInventory(displayAmount, storageAmount);
-        return product;
+        return new Product(productId, Long.parseLong(productNumber), name, price, displayAmount, storageAmount);
     }
 
     public void update(Product product) {

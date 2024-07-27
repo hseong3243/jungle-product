@@ -5,6 +5,8 @@ import com.hseong.jungleproduct.service.OrderRepository;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -25,6 +27,12 @@ public class OrderJpaRepository implements OrderRepository {
     @Override
     public Optional<Order> findById(Long orderId) {
         return orderDataJpaRepository.findById(orderId)
+                .map(OrderEntity::toDomain);
+    }
+
+    @Override
+    public Page<Order> findOrdersOrderByCreatedAt(int page, int size) {
+        return orderDataJpaRepository.findOrdersOrderByCreatedAt(PageRequest.of(page, size))
                 .map(OrderEntity::toDomain);
     }
 }

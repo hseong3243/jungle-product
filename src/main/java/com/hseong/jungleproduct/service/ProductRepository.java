@@ -11,5 +11,7 @@ public interface ProductRepository {
 
     List<Product> findAll();
 
-    List<Product> search(Long productIdPrefix);
+    List<Product> search(Long productNumberPrefix);
+
+    Optional<Product> findById(Long productId);
 }

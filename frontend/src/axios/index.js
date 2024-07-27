@@ -21,6 +21,8 @@ api.interceptors.response.use(response => {
 }, error => {
     const status = error.response.status;
     if (status === 403) {
+        const authStore = useAuthStore();
+        authStore.logout();
         router.replace('/login');
     }
 });

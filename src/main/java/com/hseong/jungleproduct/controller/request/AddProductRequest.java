@@ -1,4 +1,4 @@
 package com.hseong.jungleproduct.controller.request;
 
-public record AddProductRequest(Long productId, String name, int price) {
+public record AddProductRequest(Long productNumber, String name, int price) {
 }

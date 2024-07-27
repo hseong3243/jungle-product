@@ -9,4 +9,8 @@ public record ApiResponse<T>(T data) {
     public static ApiResponse<String> success() {
         return success("");
     }
+
+    public static ApiResponse<String> fail(String message) {
+        return new ApiResponse<>(message);
+    }
 }

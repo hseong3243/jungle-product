@@ -1,9 +1,10 @@
 <script>
 import OrderSector from "@/component/order/OrderSector.vue";
+import FindOrdersDialog from "@/component/order/FindOrdersDialog.vue";
 
 export default {
   name: "OrderPage",
-  components: {OrderSector}
+  components: {FindOrdersDialog, OrderSector}
 }
 </script>
 
@@ -17,7 +18,7 @@ export default {
         <div class="text-h6 text-center">정글 주문 관리</div>
       </v-col>
       <v-col cols="3">
-
+        <FindOrdersDialog/>
       </v-col>
     </v-row>
     <v-row>
