@@ -43,6 +43,6 @@ public class OrderEntity {
     }
 
     public Order toDomain() {
-        return new Order(orderId, product.toDomain(), amount);
+        return new Order(orderId, product.toDomain(), amount, createdAt);
     }
 }
