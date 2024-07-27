@@ -2,6 +2,7 @@ package com.hseong.jungleproduct.controller;
 
 import com.hseong.jungleproduct.auth.AccessTokenExpiredException;
 import com.hseong.jungleproduct.auth.InvalidAccessTokenException;
+import java.util.NoSuchElementException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,7 +28,7 @@ public class GlobalControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NoSuchFieldError.class)
+    @ExceptionHandler(NoSuchElementException.class)
     public ApiResponse<String> notFoundHandler(NoSuchFieldError e) {
         log.warn("존재하지 리소스에 요청이 이루어졌습니다. 메세지={}", e.getMessage());
         return ApiResponse.fail("존재하지 않는 리소스입니다.");
