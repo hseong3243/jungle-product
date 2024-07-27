@@ -80,7 +80,7 @@ class ProductServiceTest {
 
         @BeforeEach
         void setUp() {
-            product = new Product(1L, 2345L, "미니얼룩말", 24000);
+            product = new Product(1L, 2345L, "미니얼룩말", 24000, 0, 0);
             product.initializeInventory(10, 20);
         }
 

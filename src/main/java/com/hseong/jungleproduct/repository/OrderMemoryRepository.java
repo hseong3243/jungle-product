@@ -2,6 +2,7 @@ package com.hseong.jungleproduct.repository;
 
 import com.hseong.jungleproduct.domain.Order;
 import com.hseong.jungleproduct.service.OrderRepository;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,6 +30,14 @@ public class OrderMemoryRepository implements OrderRepository {
     public Page<Order> findOrdersOrderByCreatedAt(int page, int size) {
         List<Order> content = orders.values().stream().limit(size).toList();
         return new PageImpl<>(content, PageRequest.of(page, size), orders.size());
+    }
+
+    @Override
+    public Long calculateSummary(LocalDate calculatedDate) {
+        return orders.values().stream()
+                .filter(order -> order.getCreatedAt().toLocalDate().isEqual(calculatedDate))
+                .mapToLong(order -> (long) order.getProduct().getPrice() * order.getAmount())
+                .sum();
     }
 
     private long getNextId() {

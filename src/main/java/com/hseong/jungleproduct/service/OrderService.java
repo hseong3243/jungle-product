@@ -5,6 +5,7 @@ import com.hseong.jungleproduct.domain.Product;
 import com.hseong.jungleproduct.service.response.FindOrdersResponse;
 import com.hseong.jungleproduct.service.response.OrderDto;
 import jakarta.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,5 +31,9 @@ public class OrderService {
                 .map(OrderDto::from);
         return FindOrdersResponse.of(orderDtoPage.getContent(), orderDtoPage.getTotalPages(),
                 orderDtoPage.getTotalElements());
+    }
+
+    public Long calculateSummary(LocalDate calculatedDate) {
+        return orderRepository.calculateSummary(calculatedDate);
     }
 }
