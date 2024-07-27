@@ -1,5 +1,6 @@
 package com.hseong.jungleproduct.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
@@ -14,6 +15,7 @@ import com.hseong.jungleproduct.controller.request.BuyProductRequest;
 import com.hseong.jungleproduct.service.response.FindOrdersResponse;
 import com.hseong.jungleproduct.service.response.OrderDto;
 import com.hseong.jungleproduct.service.response.ProductDto;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -60,5 +62,22 @@ class OrderControllerTest extends BaseControllerTest {
 
         //then
         result.andDo(print());
+    }
+
+    @Test
+    @DisplayName("GET /api/calculates 호출 시 특정 날짜의 판매 금액을 조죄한다.")
+    void calculateOrdersAmount() throws Exception {
+        //given
+        given(orderService.calculateSummary(any()))
+                .willReturn(24000L);
+
+        //when
+        ResultActions result = mockMvc.perform(get("/api/calculates")
+                        .header(AUTHORIZATION_HEADER, accessToken)
+                .param("calculateDate", LocalDate.now().toString()));
+
+        //then
+        result.andDo(print())
+                .andExpect(status().isOk());
     }
 }

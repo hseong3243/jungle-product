@@ -1,6 +1,7 @@
 package com.hseong.jungleproduct.controller;
 
 import com.hseong.jungleproduct.controller.request.BuyProductRequest;
+import com.hseong.jungleproduct.controller.request.CalculateOrdersAmountRequest;
 import com.hseong.jungleproduct.controller.request.FindOrderRequest;
 import com.hseong.jungleproduct.service.OrderService;
 import com.hseong.jungleproduct.service.response.FindOrdersResponse;
@@ -30,5 +31,10 @@ public class OrderController {
     @GetMapping("/orders")
     public ApiResponse<FindOrdersResponse> findOrders(FindOrderRequest request) {
         return ApiResponse.success(orderService.findOrders(request.page(), request.size()));
+    }
+
+    @GetMapping("/calculates")
+    public ApiResponse<Long> calculateOrdersAmount(CalculateOrdersAmountRequest request) {
+        return ApiResponse.success(orderService.calculateSummary(request.calculateDate()));
     }
 }
