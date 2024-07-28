@@ -1,8 +1,13 @@
 <script>
 import api from "@/axios/index.js";
+import {useOrderStore} from "@/store/OrderStore.js";
 
 export default {
   name: "BuyProductDialog",
+  setup() {
+    const orderStore = useOrderStore();
+    return {orderStore}
+  },
   props: ['product', 'amount'],
   emits: ['cancelBuyProductEvent', 'buyProductEvent'],
   data() {
@@ -20,7 +25,8 @@ export default {
         productId: this.product.productId,
         amount: this.amount,
       }
-      let response = await api.post('/api/orders', request);
+      await api.post('/api/orders', request);
+      await this.orderStore.findOrdersApiCall(0, 10);
       this.$emit('buyProductEvent');
       this.dialog = false;
     }
