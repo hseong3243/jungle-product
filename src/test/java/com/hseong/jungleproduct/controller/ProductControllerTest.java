@@ -73,7 +73,7 @@ class ProductControllerTest extends BaseControllerTest {
         ProductDto productDto = new ProductDto(1L, 1214L, "미니얼룩말", 24000, 10, 30);
         List<ProductDto> products = List.of(productDto);
 
-        given(productService.searchProduct(anyLong())).willReturn(products);
+        given(productService.searchProduct(anyString())).willReturn(products);
 
         //when
         ResultActions result = mockMvc.perform(get("/api/products/search")

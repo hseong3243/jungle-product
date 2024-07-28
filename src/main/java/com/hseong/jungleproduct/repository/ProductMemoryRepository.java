@@ -33,9 +33,9 @@ public class ProductMemoryRepository implements ProductRepository {
     }
 
     @Override
-    public List<Product> search(Long productNumberPrefix) {
+    public List<Product> search(String productNumberPrefix) {
         return products.values().stream()
-                .filter(product -> product.getProductNumber().toString().startsWith(productNumberPrefix.toString()))
+                .filter(product -> product.getProductNumber().toString().startsWith(productNumberPrefix))
                 .toList();
     }
 

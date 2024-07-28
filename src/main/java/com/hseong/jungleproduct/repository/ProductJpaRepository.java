@@ -33,8 +33,8 @@ public class ProductJpaRepository implements ProductRepository {
     }
 
     @Override
-    public List<Product> search(Long productNumberPrefix) {
-        return productDataJpaRepository.findAllByProductNumberStartsWith(productNumberPrefix.toString())
+    public List<Product> search(String productNumberPrefix) {
+        return productDataJpaRepository.findAllByProductNumberStartsWith(productNumberPrefix)
                 .stream()
                 .map(ProductEntity::toDomain)
                 .toList();

@@ -151,7 +151,7 @@ class ProductServiceTest {
             productRepository.save(productC);
 
             //when
-            List<ProductDto> productDtos = productService.searchProduct(23L);
+            List<ProductDto> productDtos = productService.searchProduct("23");
 
             //then
             assertThat(productDtos).hasSize(2)
