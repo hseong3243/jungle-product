@@ -109,7 +109,7 @@ export default {
                   <td>{{ order.product.productNumber }}</td>
                   <td>{{ order.product.name }}</td>
                   <td>{{ order.amount }}</td>
-                  <td>{{ order.amount * order.product.price }}</td>
+                  <td>{{ (order.amount * order.product.price).toLocaleString("ko-KR") }}</td>
                   <td>{{ dayjs(order.createdAt).format('YYYY/MM/DD ahh:mm:ss') }}</td>
                 </tr>
                 </tbody>

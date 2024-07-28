@@ -70,7 +70,7 @@ export default {
                 판매 갯수: {{ amount }}개
               </div>
               <div>
-                총 가격: {{ amount * product.price }}원
+                총 가격: {{ (amount * product.price).toLocaleString("ko-KR") }}원
               </div>
             </v-col>
           </v-row>
