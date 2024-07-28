@@ -26,7 +26,7 @@ export default {
         amount: this.amount,
       }
       await api.post('/api/orders', request);
-      await this.orderStore.findOrdersApiCall(0, 10);
+      await this.orderStore.refreshOrders();
       this.$emit('buyProductEvent');
       this.dialog = false;
     }
