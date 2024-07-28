@@ -24,8 +24,6 @@ export const useAuthStore = defineStore('auth', {
                 username: username,
                 password: password,
             });
-
-            console.log(response)
             if(response.status === 200) {
                 const data = response.data.data;
                 this.accessToken = data.accessToken;

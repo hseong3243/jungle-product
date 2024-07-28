@@ -2,37 +2,20 @@ package com.hseong.jungleproduct.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.hseong.jungleproduct.base.DatabaseCleaner;
+import com.hseong.jungleproduct.base.BaseIntegrationTest;
 import com.hseong.jungleproduct.domain.Order;
 import com.hseong.jungleproduct.domain.Product;
 import com.hseong.jungleproduct.service.response.FindOrdersResponse;
 import com.hseong.jungleproduct.service.response.OrderDto;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class OrderServiceIntegrationTest {
-
-    @Autowired
-    EntityManagerFactory emf;
-
-    @BeforeEach
-    void setUp() {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        DatabaseCleaner databaseCleaner = new DatabaseCleaner(em);
-        databaseCleaner.clear();
-        em.getTransaction().commit();
-    }
+class OrderServiceIntegrationTest extends BaseIntegrationTest {
 
     @Autowired
     private OrderService orderService;

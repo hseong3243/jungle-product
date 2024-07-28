@@ -14,7 +14,7 @@ public interface OrderDataJpaRepository extends JpaRepository<OrderEntity, Long>
             + " order by o.createdAt desc")
     Page<OrderEntity> findOrdersOrderByCreatedAt(Pageable pageable);
 
-    @Query(value = "select sum(o.amount * p.price) from OrderEntity o"
+    @Query(value = "select coalesce(sum(o.amount * p.price), 0) from OrderEntity o"
             + " join o.product p"
             + " where o.createdAt between :startOfDay and :endOfDay")
     Long calculateSummary(@Param("startOfDay") ZonedDateTime startOfDay,

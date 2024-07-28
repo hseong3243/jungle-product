@@ -2,15 +2,26 @@
 import ProductSector from "@/component/product/ProductSector.vue";
 import OrderSector from "@/component/order/OrderSector.vue";
 import AddProductDialog from "@/component/product/AddProductDialog.vue";
+import {useAuthStore} from "@/store/AuthStore.js";
+import router from "@/router/router.js";
 
 const ORDER = 'ORDER';
 const PRODUCT = 'PRODUCT';
 export default {
   name: "App",
   components: {AddProductDialog, OrderSector, ProductSector},
+  setup() {
+    const authStore = useAuthStore();
+    return {authStore}
+  },
   data() {
     return {
       page: ORDER,
+    }
+  },
+  mounted() {
+    if(!this.authStore.isLogin) {
+      router.replace("/login");
     }
   },
   methods: {

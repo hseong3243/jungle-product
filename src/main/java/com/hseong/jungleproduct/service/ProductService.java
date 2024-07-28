@@ -48,8 +48,8 @@ public class ProductService {
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public List<ProductDto> searchProduct(Long productNumberPrefix) {
-        List<Product> products = productRepository.search(productNumberPrefix);
+    public List<ProductDto> searchProduct(String productNumberPrefix) {
+        List<Product> products = productRepository.search(productNumberPrefix.trim());
         return products.stream()
                 .map(ProductDto::from)
                 .toList();

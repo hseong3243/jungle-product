@@ -40,7 +40,7 @@ public class ProductController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/products/search")
-    public ApiResponse<List<ProductDto>> searchProducts(@RequestParam("productNumber") Long productNumber) {
+    public ApiResponse<List<ProductDto>> searchProducts(@RequestParam("productNumber") String productNumber) {
         List<ProductDto> productDtos = productService.searchProduct(productNumber);
         return ApiResponse.success(productDtos);
     }

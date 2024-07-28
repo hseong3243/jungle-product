@@ -1,8 +1,13 @@
 <script>
 import api from "@/axios/index.js";
+import {useProductStore} from "@/store/ProductStore.js";
 
 export default {
   name: "AddProductDialog",
+  setup() {
+    const productStore = useProductStore();
+    return {productStore}
+  },
   data() {
     return {
       productNumber: "",
@@ -18,8 +23,8 @@ export default {
         name: this.name,
         price: this.price,
       }
-      let response = await api.post('/api/products', request);
-      console.log(response)
+      await api.post('/api/products', request);
+      await this.productStore.searchProducts("");
       this.dialog = false;
     },
     clickCancelButton() {

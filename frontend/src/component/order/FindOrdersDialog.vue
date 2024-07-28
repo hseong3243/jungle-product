@@ -1,9 +1,14 @@
 <script>
 import dayjs from "dayjs";
 import api from "@/axios/index.js";
+import {useOrderStore} from "@/store/OrderStore.js";
 
 export default {
   name: "FindOrdersDialog",
+  setup() {
+    const orderStore = useOrderStore();
+    return {orderStore}
+  },
   computed: {
     dayjs() {
       return dayjs
@@ -33,28 +38,22 @@ export default {
     }
   },
   async mounted() {
-    await this.findOrdersApiCall(0, this.size);
+    this.orderStore.$subscribe((mutation, state) => {
+      this.orders = state.orders;
+      this.totalPages = state.totalPages;
+      this.totalElements = state.totalElements;
+    })
+
+    await this.orderStore.findOrdersApiCall(0, this.size);
     await this.calculateOrdersAmountApiCall(dayjs().format('YYYY-MM-DD'));
     this.dataReady = true;
   },
   watch: {
     page() {
-      this.findOrdersApiCall(this.page - 1, this.size);
+      this.orderStore.findOrdersApiCall(this.page - 1, this.size);
     }
   },
   methods: {
-    async findOrdersApiCall(page, size) {
-      const response = await api.get('/api/orders', {
-        params: {
-          page,
-          size
-        }
-      });
-      const data = response.data.data;
-      this.orders = data.orders;
-      this.totalElements = data.totalElements;
-      this.totalPages = data.totalPages;
-    },
     async calculateOrdersAmountApiCall(date) {
       const response = await api.get('/api/calculates', {
         params: {

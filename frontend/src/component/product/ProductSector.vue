@@ -4,10 +4,15 @@ import ProductCard from "@/component/product/ProductCard.vue";
 import AddProductDialog from "@/component/product/AddProductDialog.vue";
 import api from "@/axios/index.js";
 import {debounce} from "lodash";
+import {useProductStore} from "@/store/ProductStore.js";
 
 export default {
   name: "ProductPage",
   components: {AddProductDialog, ProductCard, OrderCard},
+  setup() {
+    const productStore = useProductStore();
+    return {productStore};
+  },
   data() {
     return {
       keyword: "",
@@ -29,35 +34,24 @@ export default {
       this.searchProducts(val)
     }, 200)
   },
-  methods: {
-    async findAllProducts() {
-      let response = await api.get('/api/products');
-      this.products = response.data.data;
-    },
-    async searchProducts(prefix) {
-      if(prefix === "") {
-        await this.findAllProducts()
-        return;
-      }
-      let response = await api.get('/api/products/search', {
-        params: {
-          productNumber: prefix
-        }
-      });
-      this.products = response.data.data;
-      console.log(this.products)
-    },
-    consumeUpdateProductAmountEvent() {
-      if(this.keyword.length >= 1) {
-        this.searchProducts(this.keyword);
-        return;
-      }
-      this.findAllProducts();
-    }
-  },
   async mounted() {
+    this.productStore.$subscribe((mutation, state) => {
+      this.products = state.products;
+    })
     await this.findAllProducts()
     this.ready = true;
+  },
+  methods: {
+    async findAllProducts() {
+      await this.searchProducts("");
+    },
+    async searchProducts(prefix) {
+      await this.productStore.searchProducts(prefix.trim());
+      this.products = this.productStore.getProducts;
+    },
+    consumeUpdateProductAmountEvent() {
+      this.searchProducts(this.keyword.trim())
+    }
   }
 }
 </script>
