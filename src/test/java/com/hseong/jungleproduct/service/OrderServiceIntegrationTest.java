@@ -3,11 +3,14 @@ package com.hseong.jungleproduct.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hseong.jungleproduct.base.DatabaseCleaner;
+import com.hseong.jungleproduct.domain.Order;
 import com.hseong.jungleproduct.domain.Product;
 import com.hseong.jungleproduct.service.response.FindOrdersResponse;
 import com.hseong.jungleproduct.service.response.OrderDto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +36,9 @@ class OrderServiceIntegrationTest {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -89,9 +95,39 @@ class OrderServiceIntegrationTest {
             FindOrdersResponse orders = orderService.findOrders(0, 10);
 
             //then
-            List<OrderDto> orderDtos = orders.orderDtos();
+            List<OrderDto> orderDtos = orders.orders();
             assertThat(orderDtos).map(OrderDto::orderId)
                     .containsExactly(orderIdF, orderIdE, orderIdD, orderIdC, orderIdB, orderIdA);
+        }
+    }
+
+    @Nested
+    @DisplayName("calculateSummary 호출 시")
+    class CalculateSummaryTest {
+
+        @Test
+        @DisplayName("해당 날짜의 판매액을 계산한다.")
+        void calculateSummaryAtInputDate() {
+            //given
+            Long productId = productService.addProduct(1234L, "얼룩말", 24000);
+            productService.initializeAmount(productId, 30, 50);
+
+            Product product = productRepository.findById(productId).get();
+            orderService.buyProduct(productId, 2);
+            orderService.buyProduct(productId, 2);
+            orderService.buyProduct(productId, 2);
+            orderService.buyProduct(productId, 2);
+
+            Order orderYesterday = new Order(null, product, 2, ZonedDateTime.now().minusDays(1));
+            Order orderTomorrow = new Order(null, product, 2, ZonedDateTime.now().plusDays(1));
+            orderRepository.save(orderYesterday);
+            orderRepository.save(orderTomorrow);
+
+            //when
+            Long summary = orderService.calculateSummary(LocalDate.now());
+
+            //then
+            assertThat(summary).isEqualTo(24000 * 8);
         }
     }
 }

@@ -28,11 +28,13 @@ export default {
       size: 10,
       totalElements: 0,
       totalPages: 0,
+      calculateOrdersAmount: 0,
       dataReady: false,
     }
   },
   async mounted() {
     await this.findOrdersApiCall(0, this.size);
+    await this.calculateOrdersAmountApiCall(dayjs().format('YYYY-MM-DD'));
     this.dataReady = true;
   },
   watch: {
@@ -52,6 +54,15 @@ export default {
       this.orders = data.orders;
       this.totalElements = data.totalElements;
       this.totalPages = data.totalPages;
+    },
+    async calculateOrdersAmountApiCall(date) {
+      const response = await api.get('/api/calculates', {
+        params: {
+          calculateDate: date
+        }
+      });
+      const data = response.data;
+      this.calculateOrdersAmount = data.data;
     }
   }
 }
@@ -71,7 +82,10 @@ export default {
         <v-container>
           <v-row class="align-center">
             <v-col>
-              <div>주문 확인</div>
+              <div>주문 내역</div>
+            </v-col>
+            <v-col class="d-flex justify-end">
+              <div>금일 판매 금액: {{calculateOrdersAmount.toLocaleString("ko-KR")}}원</div>
             </v-col>
           </v-row>
           <v-row>

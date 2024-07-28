@@ -33,7 +33,7 @@ class OrderServiceTest {
 
         @BeforeEach
         void setUp() {
-            product = new Product(1L, 4038L, "미니 얼룩말", 24000);
+            product = new Product(1L, 4038L, "미니 얼룩말", 24000, 0, 0);
             product.initializeInventory(10, 40);
             productRepository.save(product);
         }

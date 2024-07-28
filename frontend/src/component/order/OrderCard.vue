@@ -26,7 +26,7 @@ export default {
   <div class="d-flex flex-column card">
     <div class="d-flex justify-space-between mb-1">
       <div>no. {{ product.productNumber }}</div>
-      <div>{{ product.price }}원</div>
+      <div>{{ product.price.toLocaleString("ko-KR") }}원</div>
     </div>
     <div>상품명: {{ product.name }}</div>
     <div>전시 수량: {{ product.displayAmount }}</div>

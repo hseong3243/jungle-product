@@ -39,7 +39,7 @@ public class OrderEntity {
 
     public static OrderEntity from(Order order, ProductEntity product) {
         product.update(order.getProduct());
-        return new OrderEntity(order.getOrderId(), product, order.getAmount(), ZonedDateTime.now());
+        return new OrderEntity(order.getOrderId(), product, order.getAmount(), order.getCreatedAt());
     }
 
     public Order toDomain() {
