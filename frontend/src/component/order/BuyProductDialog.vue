@@ -26,7 +26,7 @@ export default {
         amount: this.amount,
       }
       await api.post('/api/orders', request);
-      await this.orderStore.findOrdersApiCall(0, 10);
+      await this.orderStore.refreshOrders();
       this.$emit('buyProductEvent');
       this.dialog = false;
     }
@@ -70,7 +70,7 @@ export default {
                 판매 갯수: {{ amount }}개
               </div>
               <div>
-                총 가격: {{ amount * product.price }}원
+                총 가격: {{ (amount * product.price).toLocaleString("ko-KR") }}원
               </div>
             </v-col>
           </v-row>

@@ -42,10 +42,10 @@ export default {
       this.orders = state.orders;
       this.totalPages = state.totalPages;
       this.totalElements = state.totalElements;
+      this.calculateOrdersAmount = state.calculateOrdersAmount;
     })
 
-    await this.orderStore.findOrdersApiCall(0, this.size);
-    await this.calculateOrdersAmountApiCall(dayjs().format('YYYY-MM-DD'));
+    await this.orderStore.refreshOrders();
     this.dataReady = true;
   },
   watch: {
@@ -54,15 +54,6 @@ export default {
     }
   },
   methods: {
-    async calculateOrdersAmountApiCall(date) {
-      const response = await api.get('/api/calculates', {
-        params: {
-          calculateDate: date
-        }
-      });
-      const data = response.data;
-      this.calculateOrdersAmount = data.data;
-    }
   }
 }
 </script>
@@ -118,7 +109,7 @@ export default {
                   <td>{{ order.product.productNumber }}</td>
                   <td>{{ order.product.name }}</td>
                   <td>{{ order.amount }}</td>
-                  <td>{{ order.amount * order.product.price }}</td>
+                  <td>{{ (order.amount * order.product.price).toLocaleString("ko-KR") }}</td>
                   <td>{{ dayjs(order.createdAt).format('YYYY/MM/DD ahh:mm:ss') }}</td>
                 </tr>
                 </tbody>
